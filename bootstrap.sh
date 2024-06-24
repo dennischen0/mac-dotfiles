@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 cd "$(dirname "${(%):-%N}")";
-
 git pull origin main;
 
 function install_oh_my_zsh() {
@@ -20,29 +19,32 @@ function install_homebrew() {
 }
 
 function doIt() {
+    read "runBrewBundleOnly?Do you only want to run 'brew bundle'? (y/n) ";
+    echo "";
+    if [[ $runBrewBundleOnly =~ ^[Yy]$ ]]; then
+        brew bundle;
+        return; # Exit after running brew bundle if that's the only requested action
+    fi
+    
+    read "reply?This may overwrite existing files in your home directory. Are you sure? (y/n) ";
+	echo "";
+    if [[ ! $reply =~ ^[Yy]$ ]]; then
+        return; # Exit early if the answer is not yes
+    fi
+
     install_oh_my_zsh;
-
     install_homebrew;
-
     brew bundle;
 
-	rsync --exclude ".git/" \
-		--exclude ".DS_Store" \
-		--exclude "bootstrap.sh" \
-		--exclude "README.md" \
+    rsync --exclude ".git/" \
+        --exclude ".DS_Store" \
+        --exclude "bootstrap.sh" \
+        --exclude "README.md" \
         --exclude ".gitignore" \
-		--exclude "docs/" \
+        --exclude "docs/" \
         --exclude "Brewfile" \
         --exclude "LICENSE-MIT.txt" \
-		-avh --no-perms . ~;
+        -avh --no-perms . ~;
 }
 
-if [ "$1" = "--force" -o "$1" = "-f" ]; then
-	doIt;
-else
-	read "reply?This may overwrite existing files in your home directory. Are you sure? (y/n) ";
-	echo "";
-	if [[ $reply =~ ^[Yy]$ ]]; then
-		doIt;
-	fi;
-fi;
+doIt;

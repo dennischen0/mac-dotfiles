@@ -33,7 +33,6 @@ You can clone the repository wherever you want. (I like to keep it in `~/workspa
 ```bash
 git clone https://github.com/dennischen0/mac-dotfiles.git 
 cd mac-dotfiles 
-chmod +x bootstrap.sh
 ./bootstrap.sh
 ```
 
