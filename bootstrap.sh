@@ -9,7 +9,7 @@ function install_oh_my_zsh() {
 }
 
 function install_homebrew() {
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"}
 }
 
 function doIt() {
@@ -23,14 +23,15 @@ function doIt() {
 		--exclude ".DS_Store" \
 		--exclude "bootstrap.sh" \
 		--exclude "README.md" \
+        --exclude ".gitignore" \
 		--exclude "docs/" \
+        --exclude "Brewfile" \
+        --exclude "LICENSE-MIT.txt" \
 		-avh --no-perms . ~;
 	source ~/.zshrc;
 
 
 }
-
-
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt;

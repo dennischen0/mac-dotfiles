@@ -9,6 +9,9 @@
 
 ```
 xcode-select --install
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 ```
 
 ### Using Git and the bootstrap script
@@ -16,7 +19,10 @@ xcode-select --install
 You can clone the repository wherever you want. (I like to keep it in `~/workspace/mac-dotfiles`.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
 
 ```bash
-git clone https://github.com/dennischen0/mac-dotfiles.git && cd mac-dotfiles && source bootstrap.sh
+git clone https://github.com/dennischen0/mac-dotfiles.git 
+cd mac-dotfiles 
+chmod +x bootstrap.sh
+./bootstrap.sh
 ```
 
 To update, `cd` into your local `dotfiles` repository and then:
