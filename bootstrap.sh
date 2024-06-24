@@ -9,7 +9,7 @@ function install_oh_my_zsh() {
 }
 
 function install_homebrew() {
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"}
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
 }
 
 function doIt() {
