@@ -5,12 +5,29 @@ cd "$(dirname "${BASH_SOURCE}")";
 git pull origin main;
 
 function doIt() {
+    install_oh_my_zsh;
+    
+    install_homebrew;
+
+    brew bundle;
+
 	rsync --exclude ".git/" \
 		--exclude ".DS_Store" \
 		--exclude "bootstrap.sh" \
 		--exclude "README.md" \
+		--exclude "docs/" \
 		-avh --no-perms . ~;
 	source ~/.zshrc;
+
+
+}
+
+function install_oh_my_zsh() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+}
+
+function install_homebrew() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

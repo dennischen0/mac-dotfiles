@@ -1,5 +1,9 @@
 # Homebrew Script for OSX
 
+# Terminal Stuff
+brew "powerlevel10k"
+cask "font-meslo-for-powerlevel10k"
+
 # Dev Tools
 cask "visual-studio-code"
 mas "TestFlight", id: 899247664
