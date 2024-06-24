@@ -11,8 +11,12 @@ function install_oh_my_zsh() {
 }
 
 function install_homebrew() {
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
-    eval "$(/opt/homebrew/bin/brew shellenv)";
+    if ! which brew > /dev/null; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
+        eval "$(/opt/homebrew/bin/brew shellenv)";
+    else
+        echo "Homebrew is already installed.";
+    fi
 }
 
 function doIt() {
