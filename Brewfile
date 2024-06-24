@@ -1,7 +1,7 @@
 # Homebrew Script for OSX
 
 # Terminal Stuff
-brew "powerlevel10k"
+# brew "powerlevel10k" # install using oh-my-zsh instead
 cask "font-meslo-for-powerlevel10k"
 
 # Dev Tools

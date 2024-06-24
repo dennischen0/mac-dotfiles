@@ -6,10 +6,13 @@ git pull origin main;
 
 function install_oh_my_zsh() {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
 }
 
 function install_homebrew() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
+    eval "$(/opt/homebrew/bin/brew shellenv)";
 }
 
 function doIt() {
@@ -28,18 +31,14 @@ function doIt() {
         --exclude "Brewfile" \
         --exclude "LICENSE-MIT.txt" \
 		-avh --no-perms . ~;
-	source ~/.zshrc;
-
-
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt;
 else
-	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+	read "reply?This may overwrite existing files in your home directory. Are you sure? (y/n) ";
 	echo "";
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	if [[ $reply =~ ^[Yy]$ ]]; then
 		doIt;
 	fi;
 fi;
-unset doIt;

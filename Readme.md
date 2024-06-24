@@ -7,12 +7,24 @@
 
 ### Prerequisites
 
-```
-xcode-select --install
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+Before proceeding, ensure your terminal application has full disk access. This is necessary for some scripts to function correctly, as they may need to read or write to protected areas of your disk.
+
+To grant full disk access to your terminal:
+
+1. Open System Preferences.
+2. Navigate to Security & Privacy > Privacy tab.
+3. Scroll down and select "Full Disk Access" from the list on the left.
+4. Click the lock icon at the bottom left to make changes (you may need to enter your administrator password).
+5. Click the "+" button, find your terminal application (e.g., Terminal, iTerm), and add it.
+6. Close System Preferences and restart your terminal application for the changes to take effect.
+
+After ensuring your terminal has full disk access, you can proceed with the installation steps below.
 
 ```
+xcode-select --install
+```
+This command installs the Xcode Command Line Tools, which are required for some of the scripts and tools used in these dotfiles. It includes compilers like gcc and tools like git, which are necessary for the installation and management of many other tools and applications.
+
 
 ### Using Git and the bootstrap script
 
