@@ -20,6 +20,7 @@ cask "wifiman"
 cask "appcleaner"
 cask "daisydisk"
 cask "synology-drive"
+cask "parallels"
 mas "Magnet", id: 441258766
 
 # Productivity apps
