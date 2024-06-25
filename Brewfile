@@ -25,6 +25,7 @@ cask "appcleaner"
 cask "daisydisk"
 cask "synology-drive"
 cask "parallels"
+mas "Hidden Bar", id: 1452453066
 mas "Magnet", id: 441258766
 
 # Productivity apps
