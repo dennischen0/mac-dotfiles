@@ -42,12 +42,6 @@ To update, `cd` into your local `dotfiles` repository and then:
 source bootstrap.sh
 ```
 
-Alternatively, to update while avoiding the confirmation prompt:
-
-```bash
-set -- -f; source bootstrap.sh
-```
-
 ## Author
 
 | ![Dennis Chen's Avatar](https://0.gravatar.com/avatar/b80f0f6f60482a0046509e30297f983b734f33dc35b888ecec07cf608ca445c8?size=70) |
@@ -56,4 +50,4 @@ set -- -f; source bootstrap.sh
 
 ## Thanks to…
 
-* [Mathias Bynens](http://benalman.com/) and his [dotfiles repository](https://github.com/mathiasbynens/dotfiles)
+* [Mathias Bynens](https://mathiasbynens.be/) and his [dotfiles repository](https://github.com/mathiasbynens/dotfiles)
