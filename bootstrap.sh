@@ -4,9 +4,19 @@ cd "$(dirname "${(%):-%N}")";
 git pull origin main;
 
 function install_oh_my_zsh() {
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        echo "Installing Oh My Zsh..."
+        RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
+    else
+        echo "Oh My Zsh is already installed.";
+    fi
 
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+        echo "Installing Powerlevel10k theme...";
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    else
+        echo "Powerlevel10k theme is already installed.";
+    fi
 }
 
 function install_homebrew() {
@@ -44,7 +54,7 @@ function doIt() {
         --exclude "docs/" \
         --exclude "Brewfile" \
         --exclude "LICENSE-MIT.txt" \
-        -avh --no-perms . ~;
+        -avh --no-perms --ignore-existing . ~;
 }
 
 doIt;
