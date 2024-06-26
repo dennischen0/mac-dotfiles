@@ -20,7 +20,7 @@ function install_oh_my_zsh() {
 }
 
 function install_homebrew() {
-    if ! which brew > /dev/null; then
+    if ! command -v brew >/dev/null 2>&1; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
         eval "$(/opt/homebrew/bin/brew shellenv)";
     else
@@ -28,11 +28,39 @@ function install_homebrew() {
     fi
 }
 
+function install_homebrew_apps() {
+    # Path to the base Brewfile
+    BASE_BREWFILE="./Brewfile"
+    # Path to the MAS Brewfile
+    MAS_BREWFILE="./Brewfile_mas"
+
+    # Always install the base applications
+    if [ -f "$BASE_BREWFILE" ]; then
+        echo "Installing base applications..."
+        brew bundle --file="$BASE_BREWFILE"
+    else
+        echo "Base Brewfile not found."
+    fi
+
+    # Workaround for checking if logged into the Mac App Store
+    # Check for any installed MAS apps as a proxy for being logged in
+    if mas list | grep -q '^[0-9]'; then
+        echo "MAS apps detected. Assuming logged into the Mac App Store. Installing MAS applications..."
+        if [ -f "$MAS_BREWFILE" ]; then
+            brew bundle --file="$MAS_BREWFILE"
+        else
+            echo "MAS Brewfile not found."
+        fi
+    else
+        echo "No MAS apps detected or unable to verify. Skipping MAS applications."
+    fi
+}
+
 function doIt() {
     read "runBrewBundleOnly?Do you only want to run 'brew bundle'? (y/n) ";
     echo "";
     if [[ $runBrewBundleOnly =~ ^[Yy]$ ]]; then
-        brew bundle;
+        install_homebrew_apps;
         return; # Exit after running brew bundle if that's the only requested action
     fi
     
@@ -44,7 +72,7 @@ function doIt() {
 
     install_oh_my_zsh;
     install_homebrew;
-    brew bundle;
+    install_homebrew_apps;
 
     rsync --exclude ".git/" \
         --exclude ".DS_Store" \
