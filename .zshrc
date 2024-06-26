@@ -106,6 +106,27 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias gst='git status'
+alias gdf='git diff'
+alias gpr='git pull --rebase --autostash --stat'
+alias gpo='git push origin HEAD'
+alias gpro='gpr;gpo'
+alias ga='git add .'
+alias gcb='git co -b'
+alias gcm='git co $(git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4)'
+alias gc='git co'
+alias gss='git stash'
+alias gsp='git stash pop'
+alias grhh='git reset --hard HEAD'
+alias grsh='git reset --soft HEAD^'
+alias gl='git log'
+alias grl='git reflog'
+alias gmm='git merge master'
+alias gmom='git merge origin/master'
+alias gri='git rebase -i'
+alias gcp='git cherry-pick'
+alias gca='git add . && git commit --amend --no-edit'
+alias gcmm='git commit -m'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
