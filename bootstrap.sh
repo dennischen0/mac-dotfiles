@@ -74,14 +74,7 @@ function doIt() {
     install_homebrew;
     install_homebrew_apps;
 
-    rsync --exclude ".git/" \
-        --exclude ".DS_Store" \
-        --exclude "bootstrap.sh" \
-        --exclude "README.md" \
-        --exclude ".gitignore" \
-        --exclude "docs/" \
-        --exclude "Brewfile" \
-        --exclude "LICENSE-MIT.txt" \
+    rsync --exclude-from='.rsync-exclude' \
         -avh --no-perms --ignore-existing . ~;
 }
 

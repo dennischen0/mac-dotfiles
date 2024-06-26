@@ -1,0 +1,9 @@
+.git/
+.DS_Store
+.rsync-exclude
+bootstrap.sh
+README.md
+.gitignore
+docs/
+Brewfile*
+LICENSE-MIT.txt
