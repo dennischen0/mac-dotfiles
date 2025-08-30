@@ -14,6 +14,7 @@ cask "discord"
 cask "iina"
 cask "plex"
 cask "spotify"
+cask "parsec"
 
 # Mac Tools
 cask "istat-menus"
@@ -23,6 +24,7 @@ cask "appcleaner"
 cask "daisydisk"
 cask "synology-drive"
 cask "parallels"
+cask "monitorcontrol"
 
 # Productivity apps
 cask "1password"

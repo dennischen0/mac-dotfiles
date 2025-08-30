@@ -1,0 +1,58 @@
+{
+  "entries": {
+    "mas": {
+      "TestFlight": {
+        "id": "899247664",
+        "version": "3.5.1"
+      },
+      "Xcode": {
+        "id": "497799835",
+        "version": "15.4"
+      },
+      "Hidden Bar": {
+        "id": "1452453066",
+        "version": "1.8"
+      },
+      "Magnet": {
+        "id": "441258766",
+        "version": "2.14.0"
+      },
+      "Amphetamine": {
+        "id": "937984704",
+        "version": "5.3.2"
+      },
+      "Wipr": {
+        "id": "1320666476",
+        "version": "1.57"
+      },
+      "Momentum": {
+        "id": "1564329434",
+        "version": "2.13.32"
+      },
+      "SponsorBlock": {
+        "id": "1573461917",
+        "version": "5.5.9"
+      },
+      "Save to Raindrop.io": {
+        "id": "1549370672",
+        "version": "5.6.35"
+      },
+      "1Password for Safari": {
+        "id": "1569813296",
+        "version": "2.24.2"
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "sonoma": {
+        "HOMEBREW_VERSION": "4.3.8",
+        "HOMEBREW_PREFIX": "/opt/homebrew",
+        "Homebrew/homebrew-core": "api",
+        "CLT": "15.3.0.0.1.1708646388",
+        "Xcode": "15.4",
+        "macOS": "14.5"
+      }
+    }
+  }
+}

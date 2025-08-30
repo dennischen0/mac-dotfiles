@@ -1,3 +1,5 @@
+fastfetch
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -8,11 +10,11 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -77,9 +79,17 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(aliases docker git rails you-should-use z zsh-syntax-highlighting zsh-history-substring-search zsh-autosuggestions)
+
+# The next 2 lines are for zsh-completions. Remove if not needed.
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
+
+# Bind keys for substring history search
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
 
 # User configuration
 
@@ -92,41 +102,59 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gst='git status'
-alias gdf='git diff'
-alias gpr='git pull --rebase --autostash --stat'
-alias gpo='git push origin HEAD'
-alias gpro='gpr;gpo'
-alias ga='git add .'
-alias gcb='git co -b'
-alias gcm='git co $(git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4)'
-alias gc='git co'
-alias gss='git stash'
-alias gsp='git stash pop'
-alias grhh='git reset --hard HEAD'
-alias grsh='git reset --soft HEAD^'
-alias gl='git log'
-alias grl='git reflog'
-alias gmm='git merge master'
-alias gmom='git merge origin/master'
-alias gri='git rebase -i'
-alias gcp='git cherry-pick'
-alias gca='git add . && git commit --amend --no-edit'
-alias gcmm='git commit -m'
+unalias rails 2>/dev/null
+unalias rake 2>/dev/null
+
+for cmd in bundle rails rake rspec; do
+  eval "$cmd() {
+    if [[ \"\$(pwd)\" == *\"safehub-api\"* ]]; then
+      docker compose run --rm api $cmd \"\$@\"
+    else
+      command $cmd \"\$@\"
+    fi
+  }"
+done
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Created by `pipx` on 2025-07-31 00:54:30
+export PATH="$PATH:/Users/dennischen/.local/bin"
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+function iterm2\_print\_user\_vars() {
+  iterm2\_set\_user\_var gitProject $(basename $(git rev-parse --show-toplevel 2> /dev/null) 2> /dev/null)
+}
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/dennischen/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+export PATH=$PATH:/Users/dennischen/.spicetify
